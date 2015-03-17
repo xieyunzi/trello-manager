@@ -1,0 +1,17 @@
+!!!
+%html(lang="zh-CN")
+  %head
+    %meta(charset="utf-8")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    = stylesheet_link_tag "application"
+    = javascript_include_tag "application"
+    = surround raw("<!--[if lt IE 9]>\n"), raw("\n<![endif]-->") do
+      = javascript_include_tag "html5"
+
+    = favicon_link_tag 'favicon.ico', rel: 'shortcut icon'
+    = content_for?(:head) ? yield(:head) : nil
+    = csrf_meta_tags
+
+  %body
+    #main-content
+      = content_for?(:content) ? yield(:content) : yield

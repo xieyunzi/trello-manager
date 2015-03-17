@@ -1,12 +1,12 @@
 class CreateBoards < ActiveRecord::Migration
   def change
-    create_table :boards, id: false do |t|
-      t.string :id, index: true
+    create_table :boards do |t|
       t.string :short_link
       t.string :name
 
-      t.primary_key :id
       t.timestamps null: false
     end
+
+    change_column :boards, :id, :string
   end
 end

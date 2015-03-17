@@ -98,6 +98,7 @@ GEM
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     oauth (0.4.7)
+    pg (0.18.1)
     rack (1.6.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -148,7 +149,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    sqlite3 (1.3.10)
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
@@ -169,9 +169,9 @@ DEPENDENCIES
   hashie
   jbuilder
   jquery-rails
+  pg
   rails (= 4.2)
   ruby-trello!
   sass-rails
-  sqlite3
   turbolinks
   uglifier

@@ -1,0 +1,17 @@
+- @notifications.each do |notification|
+  %li
+    %span
+      = notification.nf_type
+    %span
+      = notification.date
+    %span
+      = notification.unread
+    %span
+      \#member
+      // = notification.member_creator_id
+    %span
+      = link_to :card, "https://trello.com/c/#{notification.card.short_link}"
+    %span
+      = link_to :board, "https://trello.com/b/#{notification.board.short_link}"
+    %p
+      = notification.content

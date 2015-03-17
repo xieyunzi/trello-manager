@@ -1,10 +1,9 @@
 class CreateNotifications < ActiveRecord::Migration
   def change
-    create_table :notifications, id: false do |t|
-      t.string :id, index: true
+    create_table :notifications do |t|
       t.string :unread
       t.string :nf_type
-      t.date :date
+      t.datetime :date
 #      t.text :data
       t.text :content
       t.string :member_creator_id
@@ -12,8 +11,9 @@ class CreateNotifications < ActiveRecord::Migration
       t.string :board_id
       t.string :card_id
 
-      t.primary_key :id
       t.timestamps null: false
     end
+
+    change_column :notifications, :id, :string
   end
 end

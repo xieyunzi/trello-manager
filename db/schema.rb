@@ -13,14 +13,15 @@
 
 ActiveRecord::Schema.define(version: 20150317141221) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "boards", force: :cascade do |t|
     t.string   "short_link"
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  add_index "boards", ["id"], name: "index_boards_on_id"
 
   create_table "cards", force: :cascade do |t|
     t.string   "short_link"
@@ -29,8 +30,6 @@ ActiveRecord::Schema.define(version: 20150317141221) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  add_index "cards", ["id"], name: "index_cards_on_id"
 
   create_table "members", force: :cascade do |t|
     t.string   "username"
@@ -44,12 +43,10 @@ ActiveRecord::Schema.define(version: 20150317141221) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "members", ["id"], name: "index_members_on_id"
-
   create_table "notifications", force: :cascade do |t|
     t.string   "unread"
     t.string   "nf_type"
-    t.date     "date"
+    t.datetime "date"
     t.text     "content"
     t.string   "member_creator_id"
     t.string   "board_id"
@@ -57,7 +54,5 @@ ActiveRecord::Schema.define(version: 20150317141221) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
-
-  add_index "notifications", ["id"], name: "index_notifications_on_id"
 
 end

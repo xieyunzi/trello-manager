@@ -1,7 +1,6 @@
 class CreateMembers < ActiveRecord::Migration
   def change
-    create_table :members, id: false do |t|
-      t.string :id, index: true
+    create_table :members do |t|
       t.string :username
       t.string :email
       t.string :full_name
@@ -10,8 +9,9 @@ class CreateMembers < ActiveRecord::Migration
       t.string :bio
       t.string :url
 
-      t.primary_key :id
       t.timestamps null: false
     end
+
+    change_column :members, :id, :string
   end
 end
