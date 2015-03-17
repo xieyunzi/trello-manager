@@ -20,6 +20,7 @@ gem 'turbolinks'
 gem 'jbuilder'
 
 gem 'ruby-trello', git: 'https://github.com/jeremytregunna/ruby-trello.git', branch: :master
+gem 'hashie'
 # bundle exec rake doc:rails generates the API under doc/api.
 #gem 'sdoc', '~> 0.4.0',          group: :doc
 

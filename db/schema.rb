@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20150317141221) do
 
   create_table "boards", force: :cascade do |t|
-    t.string   "shortLink"
+    t.string   "short_link"
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(version: 20150317141221) do
   add_index "boards", ["id"], name: "index_boards_on_id"
 
   create_table "cards", force: :cascade do |t|
-    t.string   "shortLink"
-    t.string   "idShort"
+    t.string   "short_link"
+    t.string   "id_short"
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -48,9 +48,9 @@ ActiveRecord::Schema.define(version: 20150317141221) do
 
   create_table "notifications", force: :cascade do |t|
     t.string   "unread"
-    t.string   "type"
+    t.string   "nf_type"
     t.date     "date"
-    t.text     "data"
+    t.text     "content"
     t.string   "member_creator_id"
     t.string   "board_id"
     t.string   "card_id"

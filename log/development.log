@@ -366,3 +366,304 @@ Migrating to CreateCards (20150317141221)
             FROM sqlite_temp_master
             WHERE name='index_notifications_on_id' AND type='index'
 [0m
+  [1m[36m (7.1ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (6.4ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (1.9ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateNotifications (20150317132532)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (3.8ms)[0m  CREATE TABLE "notifications" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "unread" varchar, "type" varchar, "date" date, "content" text, "member_creator_id" varchar, "board_id" varchar, "card_id" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_notifications_on_id" ON "notifications" ("id")[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150317132532"]]
+  [1m[36m (4.8ms)[0m  [1mcommit transaction[0m
+Migrating to CreateMembers (20150317140216)
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36m (9.5ms)[0m  [1mCREATE TABLE "members" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar, "email" varchar, "full_name" varchar, "initials" varchar, "avatar_id" varchar, "bio" varchar, "url" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  CREATE  INDEX "index_members_on_id" ON "members" ("id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150317140216"]]
+  [1m[35m (7.2ms)[0m  commit transaction
+Migrating to CreateBoards (20150317141213)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (5.1ms)[0m  CREATE TABLE "boards" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "short_link" varchar, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_boards_on_id" ON "boards" ("id")[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150317141213"]]
+  [1m[36m (5.1ms)[0m  [1mcommit transaction[0m
+Migrating to CreateCards (20150317141221)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (4.4ms)[0m  [1mCREATE TABLE "cards" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "short_link" varchar, "id_short" varchar, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.3ms)[0m  CREATE  INDEX "index_cards_on_id" ON "cards" ("id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150317141221"]]
+  [1m[35m (9.6ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (6.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (1.7ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_boards_on_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_boards_on_id' AND type='index'
+
+  [1m[36m (1.9ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cards_on_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cards_on_id' AND type='index'
+[0m
+  [1m[35m (2.0ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_members_on_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_members_on_id' AND type='index'
+
+  [1m[36m (2.4ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_notifications_on_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_notifications_on_id' AND type='index'
+[0m
+  [1m[36mBoard Load (3.3ms)[0m  [1mSELECT  "boards".* FROM "boards" WHERE "boards"."id" = ? LIMIT 1[0m  [["id", 55081]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (4.5ms)[0m  [1mINSERT INTO "boards" ("id", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["id", 55081], ["created_at", "2015-03-17 15:16:01.762606"], ["updated_at", "2015-03-17 15:16:01.762606"]]
+  [1m[35m (10.6ms)[0m  commit transaction
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (4.9ms)[0m  UPDATE "boards" SET "short_link" = ?, "name" = ?, "updated_at" = ? WHERE "boards"."id" = ?  [["short_link", "W94lJbwZ"], ["name", "test board"], ["updated_at", "2015-03-17 15:16:01.781721"], ["id", 55081]]
+  [1m[36m (5.9ms)[0m  [1mcommit transaction[0m
+  [1m[35mCard Load (6.3ms)[0m  SELECT  "cards".* FROM "cards" WHERE "cards"."id" = ? LIMIT 1  [["id", 55081]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (4.8ms)[0m  INSERT INTO "cards" ("id", "created_at", "updated_at") VALUES (?, ?, ?)  [["id", 55081], ["created_at", "2015-03-17 15:16:01.820695"], ["updated_at", "2015-03-17 15:16:01.820695"]]
+  [1m[36m (7.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (5.7ms)[0m  [1mUPDATE "cards" SET "short_link" = ?, "id_short" = ?, "name" = ?, "updated_at" = ? WHERE "cards"."id" = ?[0m  [["short_link", "E5baJLCp"], ["id_short", "1"], ["name", "a card"], ["updated_at", "2015-03-17 15:16:01.838720"], ["id", 55081]]
+  [1m[35m (4.7ms)[0m  commit transaction
+  [1m[36mNotification Load (2.8ms)[0m  [1mSELECT  "notifications".* FROM "notifications" WHERE "notifications"."id" = ? LIMIT 1[0m  [["id", 55081]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (3.7ms)[0m  [1mINSERT INTO "notifications" ("id", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["id", 55081], ["created_at", "2015-03-17 15:16:01.874804"], ["updated_at", "2015-03-17 15:16:01.874804"]]
+  [1m[35m (8.5ms)[0m  commit transaction
+  [1m[36mBoard Load (8.9ms)[0m  [1mSELECT  "boards".* FROM "boards" WHERE "boards"."id" = ? LIMIT 1[0m  [["id", 55081]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mcommit transaction[0m
+  [1m[35mCard Load (3.2ms)[0m  SELECT  "cards".* FROM "cards" WHERE "cards"."id" = ? LIMIT 1  [["id", 55081]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  commit transaction
+  [1m[36mNotification Load (2.4ms)[0m  [1mSELECT  "notifications".* FROM "notifications" WHERE "notifications"."id" = ? LIMIT 1[0m  [["id", 55081]]
+  [1m[36mBoard Load (2.6ms)[0m  [1mSELECT  "boards".* FROM "boards" WHERE "boards"."id" = ? LIMIT 1[0m  [["id", 55081]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mCard Load (2.5ms)[0m  SELECT  "cards".* FROM "cards" WHERE "cards"."id" = ? LIMIT 1  [["id", 55081]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  commit transaction
+  [1m[36mNotification Load (5.9ms)[0m  [1mSELECT  "notifications".* FROM "notifications" WHERE "notifications"."id" = ? LIMIT 1[0m  [["id", 55081]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (3.8ms)[0m  [1mUPDATE "notifications" SET "board_id" = ?, "card_id" = ?, "unread" = ?, "type" = ?, "date" = ?, "content" = ?, "member_creator_id" = ?, "updated_at" = ? WHERE "notifications"."id" = ?[0m  [["board_id", "55081"], ["card_id", "55081"], ["unread", "t"], ["type", "mentionedOnCard"], ["date", "2015-03-17"], ["content", "@xieyunzi"], ["member_creator_id", "55081c032a8416f015cc9d1c"], ["updated_at", "2015-03-17 15:17:47.275546"], ["id", 55081]]
+  [1m[35m (6.7ms)[0m  commit transaction
+  [1m[36mBoard Load (185.7ms)[0m  [1mSELECT  "boards".* FROM "boards" WHERE "boards"."id" = ? LIMIT 1[0m  [["id", 55081]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mCard Load (2.8ms)[0m  SELECT  "cards".* FROM "cards" WHERE "cards"."id" = ? LIMIT 1  [["id", 55081]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  commit transaction
+  [1m[36mNotification Load (2.1ms)[0m  [1mSELECT  "notifications".* FROM "notifications" WHERE "notifications"."id" = ? LIMIT 1[0m  [["id", 55081]]
+  [1m[36m (7.3ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (8.8ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (1.7ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateNotifications (20150317132532)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (3.0ms)[0m  CREATE TABLE "notifications" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "unread" varchar, "nf_type" varchar, "date" date, "content" text, "member_creator_id" varchar, "board_id" varchar, "card_id" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_notifications_on_id" ON "notifications" ("id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150317132532"]]
+  [1m[36m (5.2ms)[0m  [1mcommit transaction[0m
+Migrating to CreateMembers (20150317140216)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (3.0ms)[0m  [1mCREATE TABLE "members" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar, "email" varchar, "full_name" varchar, "initials" varchar, "avatar_id" varchar, "bio" varchar, "url" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_members_on_id" ON "members" ("id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150317140216"]]
+  [1m[35m (5.2ms)[0m  commit transaction
+Migrating to CreateBoards (20150317141213)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (3.2ms)[0m  CREATE TABLE "boards" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "short_link" varchar, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_boards_on_id" ON "boards" ("id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150317141213"]]
+  [1m[36m (10.6ms)[0m  [1mcommit transaction[0m
+Migrating to CreateCards (20150317141221)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (2.6ms)[0m  [1mCREATE TABLE "cards" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "short_link" varchar, "id_short" varchar, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_cards_on_id" ON "cards" ("id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150317141221"]]
+  [1m[35m (5.8ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (2.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (2.6ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_boards_on_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_boards_on_id' AND type='index'
+
+  [1m[36m (5.9ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cards_on_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cards_on_id' AND type='index'
+[0m
+  [1m[35m (2.4ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_members_on_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_members_on_id' AND type='index'
+
+  [1m[36m (5.7ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_notifications_on_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_notifications_on_id' AND type='index'
+[0m
+  [1m[36mBoard Load (2.1ms)[0m  [1mSELECT  "boards".* FROM "boards" WHERE "boards"."id" = ? LIMIT 1[0m  [["id", 55081]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (2.7ms)[0m  [1mINSERT INTO "boards" ("id", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["id", 55081], ["created_at", "2015-03-17 15:22:25.534461"], ["updated_at", "2015-03-17 15:22:25.534461"]]
+  [1m[35m (10.5ms)[0m  commit transaction
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (6.5ms)[0m  UPDATE "boards" SET "short_link" = ?, "name" = ?, "updated_at" = ? WHERE "boards"."id" = ?  [["short_link", "W94lJbwZ"], ["name", "test board"], ["updated_at", "2015-03-17 15:22:25.551548"], ["id", 55081]]
+  [1m[36m (16.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mCard Load (4.1ms)[0m  SELECT  "cards".* FROM "cards" WHERE "cards"."id" = ? LIMIT 1  [["id", 55081]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (3.9ms)[0m  INSERT INTO "cards" ("id", "created_at", "updated_at") VALUES (?, ?, ?)  [["id", 55081], ["created_at", "2015-03-17 15:22:25.619252"], ["updated_at", "2015-03-17 15:22:25.619252"]]
+  [1m[36m (13.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (8.5ms)[0m  [1mUPDATE "cards" SET "short_link" = ?, "id_short" = ?, "name" = ?, "updated_at" = ? WHERE "cards"."id" = ?[0m  [["short_link", "E5baJLCp"], ["id_short", "1"], ["name", "a card"], ["updated_at", "2015-03-17 15:22:25.641622"], ["id", 55081]]
+  [1m[35m (10.3ms)[0m  commit transaction
+  [1m[36mNotification Load (2.4ms)[0m  [1mSELECT  "notifications".* FROM "notifications" WHERE "notifications"."id" = ? LIMIT 1[0m  [["id", 55081]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (9.9ms)[0m  [1mINSERT INTO "notifications" ("id", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["id", 55081], ["created_at", "2015-03-17 15:22:25.727413"], ["updated_at", "2015-03-17 15:22:25.727413"]]
+  [1m[35m (22.2ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (5.4ms)[0m  UPDATE "notifications" SET "board_id" = ?, "card_id" = ?, "unread" = ?, "nf_type" = ?, "date" = ?, "content" = ?, "member_creator_id" = ?, "updated_at" = ? WHERE "notifications"."id" = ?  [["board_id", "55081"], ["card_id", "55081"], ["unread", "true"], ["nf_type", "mentionedOnCard"], ["date", "2015-03-17"], ["content", "@xieyunzi"], ["member_creator_id", "55081c032a8416f015cc9d1c"], ["updated_at", "2015-03-17 15:22:25.777684"], ["id", 55081]]
+  [1m[36m (17.9ms)[0m  [1mcommit transaction[0m
+
+sss
+{"text"=>"@xieyunzi", "card"=>{"shortLink"=>"E5baJLCp", "idShort"=>1, "name"=>"a card", "id"=>"55081d23328513793f70e79f"}, "board"=>{"shortLink"=>"W94lJbwZ", "name"=>"test board", "id"=>"55081cf0f6778bd6398b0d22"}}
+  [1m[36mBoard Load (2.0ms)[0m  [1mSELECT  "boards".* FROM "boards" WHERE "boards"."id" = ? LIMIT 1[0m  [["id", 55081]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mCard Load (2.0ms)[0m  SELECT  "cards".* FROM "cards" WHERE "cards"."id" = ? LIMIT 1  [["id", 55081]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  commit transaction
+  [1m[36mNotification Load (2.2ms)[0m  [1mSELECT  "notifications".* FROM "notifications" WHERE "notifications"."id" = ? LIMIT 1[0m  [["id", 55081]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+{"total"=>0, "creditType"=>"gold", "earnedCredit"=>true}
+  [1m[35mNotification Load (2.6ms)[0m  SELECT  "notifications".* FROM "notifications" WHERE "notifications"."id" = ? LIMIT 1  [["id", 55081]]
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (3.0ms)[0m  UPDATE "notifications" SET "board_id" = ?, "card_id" = ?, "nf_type" = ?, "content" = ?, "updated_at" = ? WHERE "notifications"."id" = ?  [["board_id", nil], ["card_id", nil], ["nf_type", "memberJoinedTrello"], ["content", nil], ["updated_at", "2015-03-17 15:31:19.636432"], ["id", 55081]]
+  [1m[36m (16.0ms)[0m  [1mcommit transaction[0m
+{"text"=>"@xieyunzi", "card"=>{"shortLink"=>"E5baJLCp", "idShort"=>1, "name"=>"a card", "id"=>"55081d23328513793f70e79f"}, "board"=>{"shortLink"=>"W94lJbwZ", "name"=>"test board", "id"=>"55081cf0f6778bd6398b0d22"}}
+  [1m[36mBoard Load (2.3ms)[0m  [1mSELECT  "boards".* FROM "boards" WHERE "boards"."id" = ? LIMIT 1[0m  [["id", 55081]]
+  [1m[35mCard Load (2.2ms)[0m  SELECT  "cards".* FROM "cards" WHERE "cards"."id" = ? LIMIT 1  [["id", 55081]]
+  [1m[36mNotification Load (4.7ms)[0m  [1mSELECT  "notifications".* FROM "notifications" WHERE "notifications"."id" = ? LIMIT 1[0m  [["id", 55081]]
+{"total"=>0, "creditType"=>"gold", "earnedCredit"=>true}
+  [1m[35mNotification Load (2.6ms)[0m  SELECT  "notifications".* FROM "notifications" WHERE "notifications"."id" = ? LIMIT 1  [["id", 55081]]
+  [1m[36mNotification Load (2.2ms)[0m  [1mSELECT "notifications".* FROM "notifications"[0m
+  [1m[35mNotification Load (2.4ms)[0m  SELECT  "notifications".* FROM "notifications"  ORDER BY "notifications"."id" ASC LIMIT 1
+  [1m[36mNotification Load (2.3ms)[0m  [1mSELECT  "notifications".* FROM "notifications"  ORDER BY "notifications"."id" DESC LIMIT 1[0m
+  [1m[35mCard Load (3.4ms)[0m  SELECT "cards".* FROM "cards"
+  [1m[36mNotification Load (200.0ms)[0m  [1mSELECT  "notifications".* FROM "notifications"  ORDER BY "notifications"."id" ASC LIMIT 1[0m
+  [1m[35mNotification Load (2.4ms)[0m  SELECT  "notifications".* FROM "notifications"  ORDER BY "notifications"."id" ASC LIMIT 1
+  [1m[36mCard Load (3.2ms)[0m  [1mSELECT  "cards".* FROM "cards"  ORDER BY "cards"."id" ASC LIMIT 1[0m
+  [1m[35mNotification Load (2.4ms)[0m  SELECT  "notifications".* FROM "notifications"  ORDER BY "notifications"."id" ASC LIMIT 1
+  [1m[36mNotification Load (2.2ms)[0m  [1mSELECT  "notifications".* FROM "notifications"  ORDER BY "notifications"."id" ASC LIMIT 1[0m
+  [1m[35mNotification Load (9.2ms)[0m  SELECT  "notifications".* FROM "notifications"  ORDER BY "notifications"."id" ASC LIMIT 1
+  [1m[36mCard Load (2.5ms)[0m  [1mSELECT  "cards".* FROM "cards"  ORDER BY "cards"."id" ASC LIMIT 1[0m
+  [1m[35mCard Load (2.1ms)[0m  SELECT  "cards".* FROM "cards"  ORDER BY "cards"."id" ASC LIMIT 1
+  [1m[36m (7.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (8.3ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (3.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateNotifications (20150317132532)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (2.8ms)[0m  CREATE TABLE "notifications" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "unread" varchar, "nf_type" varchar, "date" date, "content" text, "member_creator_id" varchar, "board_id" varchar, "card_id" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_notifications_on_id" ON "notifications" ("id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150317132532"]]
+  [1m[36m (5.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateMembers (20150317140216)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (2.9ms)[0m  [1mCREATE TABLE "members" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar, "email" varchar, "full_name" varchar, "initials" varchar, "avatar_id" varchar, "bio" varchar, "url" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_members_on_id" ON "members" ("id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150317140216"]]
+  [1m[35m (4.8ms)[0m  commit transaction
+Migrating to CreateBoards (20150317141213)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (2.3ms)[0m  CREATE TABLE "boards" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "short_link" varchar, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_boards_on_id" ON "boards" ("id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150317141213"]]
+  [1m[36m (8.0ms)[0m  [1mcommit transaction[0m
+Migrating to CreateCards (20150317141221)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (2.9ms)[0m  [1mCREATE TABLE "cards" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "short_link" varchar, "id_short" varchar, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  CREATE  INDEX "index_cards_on_id" ON "cards" ("id")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150317141221"]]
+  [1m[35m (8.3ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (2.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (3.7ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_boards_on_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_boards_on_id' AND type='index'
+
+  [1m[36m (5.6ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_cards_on_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_cards_on_id' AND type='index'
+[0m
+  [1m[35m (1.7ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_members_on_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_members_on_id' AND type='index'
+
+  [1m[36m (1.8ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_notifications_on_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_notifications_on_id' AND type='index'
+[0m
+{"text"=>"@xieyunzi", "card"=>{"shortLink"=>"E5baJLCp", "idShort"=>1, "name"=>"a card", "id"=>"55081d23328513793f70e79f"}, "board"=>{"shortLink"=>"W94lJbwZ", "name"=>"test board", "id"=>"55081cf0f6778bd6398b0d22"}}
+  [1m[36mBoard Load (2.2ms)[0m  [1mSELECT  "boards".* FROM "boards" WHERE "boards"."id" = ? LIMIT 1[0m  [["id", 55081]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (3.4ms)[0m  [1mINSERT INTO "boards" ("id", "short_link", "name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["id", 55081], ["short_link", "W94lJbwZ"], ["name", "test board"], ["created_at", "2015-03-17 15:40:03.864413"], ["updated_at", "2015-03-17 15:40:03.864413"]]
+  [1m[35m (6.7ms)[0m  commit transaction
+  [1m[36mCard Load (2.7ms)[0m  [1mSELECT  "cards".* FROM "cards" WHERE "cards"."id" = ? LIMIT 1[0m  [["id", 55081]]
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36mSQL (5.5ms)[0m  [1mINSERT INTO "cards" ("id", "short_link", "id_short", "name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["id", 55081], ["short_link", "E5baJLCp"], ["id_short", "1"], ["name", "a card"], ["created_at", "2015-03-17 15:40:03.908887"], ["updated_at", "2015-03-17 15:40:03.908887"]]
+  [1m[35m (12.9ms)[0m  commit transaction
+  [1m[36mNotification Load (2.2ms)[0m  [1mSELECT  "notifications".* FROM "notifications" WHERE "notifications"."id" = ? LIMIT 1[0m  [["id", 55081]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (3.1ms)[0m  [1mINSERT INTO "notifications" ("id", "board_id", "card_id", "unread", "nf_type", "date", "content", "member_creator_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["id", 55081], ["board_id", "55081"], ["card_id", "55081"], ["unread", "f"], ["nf_type", "mentionedOnCard"], ["date", "2015-03-17"], ["content", "@xieyunzi"], ["member_creator_id", "55081c032a8416f015cc9d1c"], ["created_at", "2015-03-17 15:40:03.983110"], ["updated_at", "2015-03-17 15:40:03.983110"]]
+  [1m[35m (6.3ms)[0m  commit transaction
+{"total"=>0, "creditType"=>"gold", "earnedCredit"=>true}
+  [1m[36mNotification Load (5.0ms)[0m  [1mSELECT  "notifications".* FROM "notifications" WHERE "notifications"."id" = ? LIMIT 1[0m  [["id", 55081]]
+  [1m[35mNotification Load (2.4ms)[0m  SELECT  "notifications".* FROM "notifications"  ORDER BY "notifications"."id" ASC LIMIT 1
+  [1m[36mNotification Load (2.2ms)[0m  [1mSELECT  "notifications".* FROM "notifications"  ORDER BY "notifications"."id" ASC LIMIT 1[0m
+  [1m[35mCard Load (7.5ms)[0m  SELECT  "cards".* FROM "cards" WHERE "cards"."id" = ? LIMIT 1  [["id", 55081]]
+  [1m[36mNotification Load (2.6ms)[0m  [1mSELECT  "notifications".* FROM "notifications"  ORDER BY "notifications"."id" ASC LIMIT 1[0m
+  [1m[35mCard Load (1.8ms)[0m  SELECT  "cards".* FROM "cards" WHERE "cards"."id" = ? LIMIT 1  [["id", 55081]]
