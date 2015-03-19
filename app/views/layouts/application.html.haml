@@ -3,15 +3,23 @@
   %head
     %meta(charset="utf-8")
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    %title Trello manager
     = stylesheet_link_tag "application"
     = javascript_include_tag "application"
     = surround raw("<!--[if lt IE 9]>\n"), raw("\n<![endif]-->") do
       = javascript_include_tag "html5"
 
-    = favicon_link_tag 'favicon.ico', rel: 'shortcut icon'
     = content_for?(:head) ? yield(:head) : nil
     = csrf_meta_tags
 
   %body
-    #main-content
+    .navbar.navbar-default
+      .navbar-header
+        %a.navbar-brand.logo(href="/")
+          Trello Notifications
+    .container
+      - if notice
+        .alert.alert-success=notice
+      - if alert
+        .alert.alert-danger=alert
       = content_for?(:content) ? yield(:content) : yield

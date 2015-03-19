@@ -1,3 +1,20 @@
 // Place all the styles related to the Notifications controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.label.time {
+  margin-right: 1em;
+}
+
+.notifications {
+  ul {
+    padding-left: 0;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  .notification {
+    margin: 1em auto;
+  }
+}

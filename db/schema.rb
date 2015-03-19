@@ -49,10 +49,14 @@ ActiveRecord::Schema.define(version: 20150317141221) do
     t.datetime "date"
     t.text     "content"
     t.string   "member_creator_id"
+    t.string   "mentioned_to"
     t.string   "board_id"
     t.string   "card_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
+
+  add_index "notifications", ["member_creator_id"], name: "index_notifications_on_member_creator_id", using: :btree
+  add_index "notifications", ["mentioned_to"], name: "index_notifications_on_mentioned_to", using: :btree
 
 end

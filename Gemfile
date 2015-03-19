@@ -1,7 +1,9 @@
-source 'http://ruby.taobao.org'
+source 'https://rubygems.org'
+# source 'http://ruby.taobao.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2'
+gem 'responders', '~> 2.0'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 gem 'pg'
@@ -13,15 +15,21 @@ gem 'uglifier'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails'
 
+gem 'bootstrap-sass'
+gem 'font-awesome-rails'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+gem 'jquery-turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
 
-gem 'ruby-trello', git: 'https://github.com/jeremytregunna/ruby-trello.git', branch: :master
+gem 'ruby-trello', git: 'https://github.com/xieyunzi/ruby-trello.git', branch: :master
 gem 'hashie'
+
+gem 'rails_config'
 # bundle exec rake doc:rails generates the API under doc/api.
 #gem 'sdoc', '~> 0.4.0',          group: :doc
 

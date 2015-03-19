@@ -6,7 +6,9 @@ class CreateNotifications < ActiveRecord::Migration
       t.datetime :date
 #      t.text :data
       t.text :content
-      t.string :member_creator_id
+      t.string :member_creator_id, index: true
+
+      t.string :mentioned_to, index: true
 
       t.string :board_id
       t.string :card_id

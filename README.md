@@ -1,13 +1,14 @@
 # README
 
-## feature
+## environment
 
-- notification list
-- reply comments
+  - rails
+  - postgresql
 
-- 附加
-  - webhooks
+## need configurate
 
-- 代写
-  - 多 client
-  - notification 与 member 关联
+```
+  config/
+    database.yml
+    settings.yml OR settings.local.yml
+```

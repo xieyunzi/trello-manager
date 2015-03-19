@@ -1,17 +1,30 @@
-- @notifications.each do |notification|
-  %li
-    %span
-      = notification.nf_type
-    %span
-      = notification.date
-    %span
-      = notification.unread
-    %span
-      \#member
-      // = notification.member_creator_id
-    %span
-      = link_to :card, "https://trello.com/c/#{notification.card.short_link}"
-    %span
-      = link_to :board, "https://trello.com/b/#{notification.board.short_link}"
-    %p
-      = notification.content
+.notifications
+  .actions.clearfix
+    = link_to 'refresh from Trello', refresh_notifications_path,
+      remote: true, method: :post, id: :refresh_notifications,
+      class: %w(btn btn-default pull-right)
+  %ul
+    - @notifications.each do |notification|
+      %li.notification
+        .panel.panel-default
+          .panel-heading
+            %span.label.label-info.time
+              = l notification.date, format: :short
+
+            = link_to notification.creator_member.full_name, notification.creator_member.url
+            mentioned you on the card
+            = link_to "#{notification.card.name}", "https://trello.com/c/#{notification.card.short_link}"
+            on
+            = link_to "#{notification.board.name}", "https://trello.com/b/#{notification.board.short_link}"
+            board
+
+            %span.pull-right
+              %button.btn.btn-default.btn-xs
+                reply
+              = link_to t("notifications.unread.#{notification.unread}"),
+                read_notification_path(notification.id),
+                remote: true, method: :post, data: { id: notification.id },
+                class: %w(btn btn-default btn-xs), id: "unread-#{notification.id}",
+                disabled: !notification.unread
+          %p.panel-body
+            = notification.content
