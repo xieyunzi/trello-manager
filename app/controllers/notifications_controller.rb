@@ -9,7 +9,7 @@ class NotificationsController < ApplicationController
   end
 
   def read
-    notification_id = params[:notification_id]
+    notification_id = params[:id]
     unread_state = false
 
     resp = trello_client.put(
@@ -17,12 +17,14 @@ class NotificationsController < ApplicationController
       unread: unread_state
     )
     logger.debug "[DEBUG] response: #{resp.inspect}"
+    unread_state =  JSON.parse(resp)['unread']
 
     @notification = Notification.find(notification_id)
     @notification.update unread: unread_state
   end
 
   def reply
+    @reply_id = params[:id]
   end
 
   def refresh

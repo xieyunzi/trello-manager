@@ -47,4 +47,3 @@ gem 'rails_config'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-

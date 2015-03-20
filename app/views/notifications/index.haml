@@ -11,20 +11,33 @@
             %span.label.label-info.time
               = l notification.date, format: :short
 
+            / xieyunzi mentioned you on the `card_name` card on `board_name` board
             = link_to notification.creator_member.full_name, notification.creator_member.url
             mentioned you on the card
-            = link_to "#{notification.card.name}", "https://trello.com/c/#{notification.card.short_link}"
+            = link_to "#{notification.card.name}",
+              "https://trello.com/c/#{notification.card.short_link}"
             on
-            = link_to "#{notification.board.name}", "https://trello.com/b/#{notification.board.short_link}"
+            = link_to "#{notification.board.name}",
+              "https://trello.com/b/#{notification.board.short_link}"
             board
 
             %span.pull-right
-              %button.btn.btn-default.btn-xs
-                reply
               = link_to t("notifications.unread.#{notification.unread}"),
                 read_notification_path(notification.id),
                 remote: true, method: :post, data: { id: notification.id },
                 class: %w(btn btn-default btn-xs), id: "unread-#{notification.id}",
                 disabled: !notification.unread
-          %p.panel-body
-            = notification.content
+          %div.panel-body
+            %p
+              = notification.content
+            %hr
+            %p.reply-content
+              .span.help-block
+                You don't need mention him(or her) manually, we do that for you.
+              %textarea.form-control{row: 5, id: "reply-content-#{notification.id}"}
+            = link_to 'Send', reply_notification_path(notification.id),
+              id: "reply-#{notification.id}",
+              remote: true, method: :post, class: %w(btn btn-default),
+              data: { id: notification.id,
+                path: "/cards/#{notification.card.id}/actions/comments",
+                creator_member: "@#{notification.creator_member.username}" }

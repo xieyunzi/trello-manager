@@ -1,4 +1,4 @@
-%script{src: "//api.trello.com/1/client.js?key=#{Settings.trello.developer_public_key}"}
+-#%script{src: "//api.trello.com/1/client.js?key=#{Settings.trello.developer_public_key}"}
 :javascript
   function AuthenticateTrello() {
     Trello.authorize({
@@ -9,7 +9,7 @@
       persist: true,
       success: function () { onAuthorizeSuccessful(); },
       error: function() { onFailedAuthorization(); },
-      scope: { write: true, read: true, account: true },
+      scope: { write: true, read: true, account: true }
     });
 
     return 0;

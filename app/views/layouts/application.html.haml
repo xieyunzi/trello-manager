@@ -6,6 +6,7 @@
     %title Trello manager
     = stylesheet_link_tag "application"
     = javascript_include_tag "application"
+    %script{src: "//api.trello.com/1/client.js?key=#{Settings.trello.developer_public_key}"}
     = surround raw("<!--[if lt IE 9]>\n"), raw("\n<![endif]-->") do
       = javascript_include_tag "html5"
 
