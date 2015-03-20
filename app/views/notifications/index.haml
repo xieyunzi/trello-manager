@@ -29,7 +29,7 @@
                 class: %w(btn btn-default btn-xs), id: "unread-#{notification.id}",
                 disabled: !notification.unread
           %div.panel-body
-            %p
+            %p.well.well-sm
               = notification.content
             %hr
             %p.reply-content

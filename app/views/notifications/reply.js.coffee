@@ -8,6 +8,7 @@ $.notify(
 reply_btn = $('<%= "#reply-#{@reply_id}"%>')
 reply_content = $('<%= "#reply-content-#{@reply_id}"%>').val()
 
+# send reply
 Trello.post(
   reply_btn.data('path')
   {
@@ -33,3 +34,7 @@ Trello.post(
         from: 'bottom'
     )
 )
+
+# mark read
+unread_btn = $('<%= "#unread-#{@reply_id}"%>')
+unread_btn.click()
