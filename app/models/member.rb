@@ -4,7 +4,7 @@ class Member < ActiveRecord::Base
     foreign_key: :member_creator_id
 
   def self.refresh_notification(trello_client, params = { read_filter: :unread })
-    params = {} # for debug TODO
+    # params = {} # for debug
     me = trello_client.find(:members, :me)
     logger.debug "[DEBUG] trello me: #{me.inspect}"
 
