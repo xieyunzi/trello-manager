@@ -30,6 +30,8 @@ gem 'ruby-trello', git: 'https://github.com/xieyunzi/ruby-trello.git', branch: :
 gem 'hashie'
 
 gem 'rails_config'
+
+gem 'kaminari'
 # bundle exec rake doc:rails generates the API under doc/api.
 #gem 'sdoc', '~> 0.4.0',          group: :doc
 

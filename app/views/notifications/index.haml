@@ -3,6 +3,7 @@
     = link_to 'refresh from Trello', refresh_notifications_path,
       remote: true, method: :post, id: :refresh_notifications,
       class: %w(btn btn-default pull-right)
+  = paginate @notifications
   %ul
     - @notifications.each do |notification|
       %li.notification
@@ -41,3 +42,4 @@
               data: { id: notification.id,
                 path: "/cards/#{notification.card.id}/actions/comments",
                 creator_member: "@#{notification.creator_member.username}" }
+  = paginate @notifications
