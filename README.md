@@ -1,5 +1,7 @@
 # README
 
+> notice: only get unread notifications from trello
+
 ## environment
 
   - rails
