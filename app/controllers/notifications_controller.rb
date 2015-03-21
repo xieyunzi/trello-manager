@@ -6,7 +6,7 @@ class NotificationsController < ApplicationController
       .page(params[:page])
       .includes(:creator_member, :board, :card)
       .where(mentioned_to: current_user_id, nf_type: Notification::MENTIONED_ON_CARD)
-      .order(unread: :desc, created_at: :desc).all
+      .order(unread: :desc, date: :desc).all
   end
 
   def read
