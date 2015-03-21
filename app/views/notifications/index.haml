@@ -11,6 +11,8 @@
           .panel-heading
             %span.label.label-info.time
               = l notification.date, format: :short
+            %span.avatar
+              %img{src: "https://trello-avatars.s3.amazonaws.com/#{notification.creator_member.avatar_id}/30.png"}
 
             / xieyunzi mentioned you on the `card_name` card on `board_name` board
             = link_to notification.creator_member.full_name, notification.creator_member.url
